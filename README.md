@@ -1,0 +1,8 @@
+# reinforce-ts
+Rewrite REINFORCEjs to TypeScript.
+## Original
+Original is reinforcejs and recurrentjs.
+
+https://github.com/karpathy/reinforcejs
+
+https://github.com/karpathy/recurrentjs
