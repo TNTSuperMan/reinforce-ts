@@ -1,4 +1,4 @@
-import type { Graph } from "./graph";
+import type { Graph } from "../optimization/graph";
 import { Mat } from "./mat";
 
 interface Prev{
