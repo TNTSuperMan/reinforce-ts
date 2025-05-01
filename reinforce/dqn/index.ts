@@ -1,4 +1,4 @@
-import { type Graph, type Net } from "../../recurrent";
+import { Mat, type Graph, type Net } from "../../recurrent";
 import { forwardQ } from "./forwardQ";
 import { initDQN } from "./init";
 import { fromJSON, toJSON } from "./json";
@@ -42,10 +42,10 @@ export class DQNAgent{
     t: number;
 
     r0: null;
-    s0: null;
-    s1: null;
-    a0: null;
-    a1: null;
+    s0: Mat | null;
+    s1: Mat | null;
+    a0: number | null;
+    a1: number | null;
 
     tderror: number;
 
