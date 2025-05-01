@@ -1,10 +1,19 @@
-export function forwardLSTM(G, model, hidden_sizes: number[], x: number, prev){
+import type { Graph } from "./graph";
+import { Mat } from "./mat";
+
+interface Model{
+    h: Mat[];
+    c: Mat[];
+    o: Mat;
+}
+
+export function forwardLSTM(G: Graph, model, hidden_sizes: number[], x: number, prev: Model): Model{
     if(prev == null || typeof prev.h === 'undefined') {
-        var hidden_prevs = [];
-        var cell_prevs = [];
+        var hidden_prevs = [] as Mat[];
+        var cell_prevs = [] as Mat[];
         for(var d=0;d<hidden_sizes.length;d++) {
-          hidden_prevs.push(new R.Mat(hidden_sizes[d],1)); 
-          cell_prevs.push(new R.Mat(hidden_sizes[d],1)); 
+          hidden_prevs.push(new Mat(hidden_sizes[d],1)); 
+          cell_prevs.push(new Mat(hidden_sizes[d],1)); 
         }
     } else {
         var hidden_prevs = prev.h;
