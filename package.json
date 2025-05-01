@@ -8,6 +8,8 @@
     "typescript": "^5"
   },
   "scripts": {
-    "build-recurrent": "bun build --minify --outdir=dist --entry-naming=recurrent.js recurrent/index.ts"
+    "build": "bun build-recurrent && bun build-reinforce",
+    "build-recurrent": "bun build --minify --outdir=dist --entry-naming=recurrent.js recurrent/index.ts",
+    "build-reinforce": "bun build --minify --outdir=dist --entry-naming=dqn.js reinforce/dqn/index.ts"
   }
 }
