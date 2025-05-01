@@ -10,4 +10,5 @@ export { RandMat } from "./class/randmat";
 export { forwardLSTM } from "./class/forwardLSTM";
 export { initLSTM } from "./class/initLSTM";
 
+export { Solver } from "./optimization/solver";
 export { Graph } from "./optimization/graph";
