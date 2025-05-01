@@ -56,6 +56,7 @@ export class DQNAgent{
 
     constructor(env: DQNEnv, opt?: Partial<DQNOptions>){
         initDQN.call(this, env, opt);
+        this.reset();
     }
 
     reset = resetDQN;
