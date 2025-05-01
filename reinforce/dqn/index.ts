@@ -3,6 +3,8 @@ import { act } from "./act";
 import { forwardQ } from "./forwardQ";
 import { initDQN } from "./init";
 import { fromJSON, toJSON } from "./json";
+import { learn } from "./learn";
+import { learnFromTuple } from "./learnFromTuple";
 import { resetDQN } from "./reset";
 
 export interface DQNOptions{
@@ -38,11 +40,11 @@ export class DQNAgent{
     na: number;
     net: Net;
 
-    exp: number[];
+    exp: [Mat, number, number, Mat, number][];
     expi: number;
     t: number;
 
-    r0: null;
+    r0: number | null;
     s0: Mat | null;
     s1: Mat | null;
     a0: number | null;
@@ -61,4 +63,6 @@ export class DQNAgent{
     fromJSON = fromJSON;
     forwardQ = forwardQ;
     act = act;
+    learn = learn;
+    learnFromTuple = learnFromTuple;
 }
