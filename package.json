@@ -6,5 +6,8 @@
   },
   "peerDependencies": {
     "typescript": "^5"
+  },
+  "scripts": {
+    "build-recurrent": "bun build --minify --outdir=dist --entry-naming=recurrent.js recurrent/index.ts"
   }
 }
