@@ -4,7 +4,7 @@ import { zeros } from "../utils/zeros";
 export interface MatJSON{
     n: number;
     d: number;
-    w: Float64Array;
+    w: number[];
 }
 
 export class Mat{
@@ -38,13 +38,13 @@ export class Mat{
         return {
             n: this.n,
             d: this.d,
-            w: this.w
+            w: Array.from(this.w)
         };
     }
     fromJSON(json: MatJSON){
         this.n = json.n;
         this.d = json.d;
-        this.w = structuredClone(json.w);
+        this.w = new Float64Array(json.w);
         this.dw = zeros(this.n * this.d);
     }
 }
