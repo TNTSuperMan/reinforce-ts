@@ -8,7 +8,7 @@ export class Graph{
     needs_backprop: boolean;
     backprop: Function[];
     constructor(needs_backprop?: boolean){
-        if(typeof needs_backprop == "undefined")
+        if(typeof needs_backprop === "undefined")
             needs_backprop = true;
         this.needs_backprop = needs_backprop;
         this.backprop = [];
@@ -64,6 +64,55 @@ export class Graph{
         const { n } = m1;
         const { d } = m2;
         const out = new Mat(n, d);
-        
+        loop(n, i => loop(d, j => {
+            let dot = 0;
+            loop(m1.d, k => 
+                dot += m1.w[m1.d*i+k] * m2.w[d*k+j]);
+            out.w[d*i+j] = dot;
+        }));
+        if(this.needs_backprop)
+            this.backprop.push(()=>
+                loop(n, i => loop(d, j => loop(m1.d, k => {
+                    const b = out.dw[d*i+j];
+                    m1.dw[m1.d*i+k] += m2.w[d*k+j] * b;
+                    m2.dw[d*k+j] += m1.w[m1.d*i+k] * b;
+                })))
+            )
+        return out;
+    }
+    add(m1: Mat, m2: Mat){
+        assert(m1.w.length === m2.w.length);
+        const out = new Mat(m1.n, m1.d);
+        loop(m1.w.length, i => out.w[i] = m1.w[i] + m2.w[i]);
+        if(this.needs_backprop)
+            this.backprop.push(()=>loop(m1.w.length, i =>{
+                m1.dw[i] += out.dw[i];
+                m2.dw[i] += out.dw[i];
+            }))
+        return out;
+    }
+    dot(m1: Mat, m2: Mat){
+        assert(m1.w.length === m2.w.length);
+        const out = new Mat(1, 1);
+        let dot = 0;
+        loop(m1.w.length, i => dot += m1.w[i] * m2.w[i]);
+        out.w[0] = dot;
+        if(this.needs_backprop)
+            this.backprop.push(()=>loop(m1.w.length, i => {
+                m1.dw[i] += m2.w[i] * out.dw[0];
+                m2.dw[i] += m1.w[i] * out.dw[0];
+            }));
+        return out;
+    }
+    eltmul(m1: Mat, m2: Mat){
+        assert(m1.w.length === m2.w.length);
+        const out = new Mat(m1.n, m1.d);
+        loop(m1.w.length, i => out.w[i] = m1.w[i] * m2.w[i]);
+        if(this.needs_backprop)
+            this.backprop.push(()=>loop(m1.w.length, i => {
+                m1.dw[i] += m2.w[i] * out.dw[i];
+                m2.dw[i] += m1.w[i] * out.dw[i];
+            }));
+        return out;
     }
 }
