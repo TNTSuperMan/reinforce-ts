@@ -10,5 +10,10 @@ export { RandMat } from "./class/randmat";
 export { forwardLSTM } from "./class/forwardLSTM";
 export { initLSTM } from "./class/initLSTM";
 
+export { updateMat, updateNet } from "./moreutils/update";
+export { copyMat, copyNet } from "./moreutils/copy";
+export { netToJSON, netFromJSON } from "./moreutils/netJSON";
+export { netZeroGrads, netFlattenGrads } from "./moreutils/netGrads";
+
 export { Solver } from "./optimization/solver";
 export { Graph } from "./optimization/graph";
