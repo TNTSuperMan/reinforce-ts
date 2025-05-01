@@ -1,5 +1,10 @@
 # reinforce-ts
 Rewrite REINFORCEjs to TypeScript.
+## Develop this
+need bun
+```bash
+$ bun i
+```
 ## Original
 Original is reinforcejs and recurrentjs.
 
