@@ -1,6 +1,12 @@
 import { assert } from "../utils/assert";
 import { zeros } from "../utils/zeros";
 
+export interface MatJSON{
+    n: number;
+    d: number;
+    w: Float64Array;
+}
+
 export class Mat{
     n: number;
     d: number;
@@ -28,14 +34,14 @@ export class Mat{
     setColumn(m: Mat, i: number){
         m.w.forEach((e, q) => this.w[(this.d * q) + i] = e);
     }
-    toJSON(){
+    toJSON(): MatJSON{
         return {
             n: this.n,
             d: this.d,
             w: this.w
         };
     }
-    fromJSON(json: {n: number, d: number, w: Float64Array}){
+    fromJSON(json: MatJSON){
         this.n = json.n;
         this.d = json.d;
         this.w = structuredClone(json.w);
