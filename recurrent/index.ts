@@ -17,3 +17,5 @@ export { netZeroGrads, netFlattenGrads } from "./moreutils/netGrads";
 
 export { Solver } from "./optimization/solver";
 export { Graph } from "./optimization/graph";
+
+export type { Net } from "./moreutils/update";
