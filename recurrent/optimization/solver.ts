@@ -1,4 +1,4 @@
-import { Mat } from "../../dist/recurrent";
+import { Mat } from "../class/mat";
 
 export class Solver{
     decay_rate: number;

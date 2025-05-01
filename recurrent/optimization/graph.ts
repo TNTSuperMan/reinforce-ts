@@ -1,6 +1,6 @@
 import { loop } from "../optimize";
 import { assert } from "../utils/assert";
-import { Mat } from "./mat";
+import { Mat } from "../class/mat";
 
 const sig = (x: number | undefined) => 1 / (1 + Math.exp(x === undefined ? 0 : -x));
 
