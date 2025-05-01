@@ -1,7 +1,7 @@
 import { Mat, type MatJSON } from "../class/mat";
 import type { Net } from "./update";
 
-type NetJSON = {
+export type NetJSON = {
     [key: PropertyKey]: MatJSON
 }
 

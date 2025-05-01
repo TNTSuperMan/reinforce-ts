@@ -19,3 +19,4 @@ export { Solver } from "./optimization/solver";
 export { Graph } from "./optimization/graph";
 
 export type { Net } from "./moreutils/update";
+export type { NetJSON } from "./moreutils/netJSON";
