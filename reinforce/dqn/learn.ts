@@ -1,7 +1,7 @@
 import type { DQNAgent } from ".";
 import { randi } from "../../recurrent";
 
-export function learn(this: DQNAgent, r1){
+export function learn(this: DQNAgent, r1: number){
     if(this.r0 !== null && this.alpha > 0){
         this.tderror = this.learnFromTuple(this.s0, this.a0, this.r0, this.s1, this.a1);
         if(this.t % this.experience_add_every === 0){
