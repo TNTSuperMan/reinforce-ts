@@ -4,14 +4,14 @@ import { zeros } from "../utils/zeros";
 export interface MatJSON{
     n: number;
     d: number;
-    w: number[];
+    w: Float64Array | number[];
 }
 
 export class Mat{
     n: number;
     d: number;
-    w: Float64Array;
-    dw: Float64Array;
+    w: Float64Array | number[];
+    dw: Float64Array | number[];
     constructor(n: number, d: number){
         this.n = n;
         this.d = d;
@@ -38,7 +38,7 @@ export class Mat{
         return {
             n: this.n,
             d: this.d,
-            w: Array.from(this.w)
+            w: this.w
         };
     }
     fromJSON(json: MatJSON){
