@@ -9,6 +9,8 @@ export function softmax(m: Mat){
         return p + out.w[i];
     });
 
-    m.w.forEach((e, i) => m.w[i] = e / s);
+    for (const [i, e] of m.w.entries()) {
+        m.w[i] = e / s;
+    }
     return out;
 }

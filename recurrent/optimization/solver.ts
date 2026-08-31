@@ -14,14 +14,15 @@ export class Solver {
         let num_clipped = 0;
         let num_tot = 0;
         for (const k in model) {
-            if (model.hasOwnProperty(k)) {
-                var m = model[k]; // mat ref
+            if (k in model) {
+                const m = model[k]; // mat ref
                 if (!(k in this.step_cache)) this.step_cache[k] = new Mat(m.n, m.d);
-                var s = this.step_cache[k];
-                for (let i = 0, n = m.w.length; i < n; i++) {
+                const s = this.step_cache[k];
+                const n = m.w.length;
+                for (let i = 0; i < n; i++) {
 
                     // rmsprop adaptive learning rate
-                    var mdwi = m.dw[i];
+                    let mdwi = m.dw[i];
                     s.w[i] = s.w[i] * this.decay_rate + (1.0 - this.decay_rate) * mdwi * mdwi;
 
                     // gradient clip

@@ -5,14 +5,14 @@ function gaussRandom(): number {
         return_v = false;
         return v_val;
     }
-    let u = 2*Math.random()-1;
-    let v = 2*Math.random()-1;
-    let r = u*u + v*v;
+    let u = 2 * Math.random() - 1;
+    let v = 2 * Math.random() - 1;
+    let r = u * u + v * v;
     if(r == 0 || r > 1) return gaussRandom();
-    let c = Math.sqrt(-2*Math.log(r)/r);
+    let c = Math.sqrt(-2 * Math.log(r) / r);
     v_val = v * c; // cache this
     return_v = true;
-    return u*c;
+    return u * c;
 }
 
 export const randf = (a: number, b: number) => Math.random() * (b - a) + a;

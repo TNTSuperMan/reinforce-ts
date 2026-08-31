@@ -5,9 +5,9 @@ export function act(this: DQNAgent, slist: Float64Array) {
     const s = new Mat(this.ns, 1);
     s.setFrom(slist);
 
-    if(Math.random() < this.epsilon){
+    if (Math.random() < this.epsilon) {
         var a = randi(0, this.na);
-    }else{
+    } else {
         const amat = this.forwardQ(this.net, s, false);
         var a = maxi(amat.w);
     }

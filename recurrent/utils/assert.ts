@@ -1,10 +1,5 @@
-export function assert(condition: unknown, message?: string) {
-    // from http://stackoverflow.com/questions/15313418/javascript-assert
+export function assert(condition: boolean, message = "Assertion failed") {
     if (!condition) {
-        message = message || "Assertion failed";
-        if (typeof Error !== "undefined") {
-            throw new Error(message);
-        }
-        throw message; // Fallback
+        throw new Error(message);
     }
 }

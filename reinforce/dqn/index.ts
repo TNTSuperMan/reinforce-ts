@@ -7,7 +7,7 @@ import { learn } from "./learn";
 import { learnFromTuple } from "./learnFromTuple";
 import { resetDQN } from "./reset";
 
-export interface DQNOptions{
+export interface DQNOptions {
     gamma: number;
     epsilon: number;
     alpha: number;
@@ -17,13 +17,12 @@ export interface DQNOptions{
     tderror_clamp: number;
     num_hidden_units: number
 }
-export interface DQNEnv{
+export interface DQNEnv {
     getNumStates(): number;
     getMaxNumActions(): number;
 }
 
-export class DQNAgent{
-    
+export class DQNAgent {
     gamma: number;
     epsilon: number;
     alpha: number;
@@ -54,7 +53,7 @@ export class DQNAgent{
 
     lastG: Graph | void;
 
-    constructor(env: DQNEnv, opt?: Partial<DQNOptions>){
+    constructor(env: DQNEnv, opt?: Partial<DQNOptions>) {
         initDQN.call(this, env, opt);
         this.reset();
     }

@@ -9,12 +9,12 @@ export function learnFromTuple(this: DQNAgent, s0: Mat, a0: number, r0: number, 
 
     let tderror = pred.w[a0] - qmax;
     const clamp = this.tderror_clamp;
-    if(Math.abs(tderror) > clamp){
-        if(tderror > clamp) tderror = clamp;
-        if(tderror < -clamp) tderror = -clamp;
+    if (Math.abs(tderror) > clamp) {
+        if (tderror > clamp) tderror = clamp;
+        if (tderror < -clamp) tderror = -clamp;
     }
     pred.dw[a0] = tderror;
-    if(this.lastG) this.lastG.backward();
+    if (this.lastG) this.lastG.backward();
 
     updateNet(this.net, this.alpha);
     return tderror;
