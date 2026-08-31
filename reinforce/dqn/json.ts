@@ -1,14 +1,14 @@
 import type { DQNAgent } from ".";
 import { netFromJSON, netToJSON, type NetJSON } from "../../recurrent";
 
-interface DQNJSON{
+interface DQNJSON {
     nh: number;
     ns: number;
     na: number;
-    net: NetJSON
+    net: NetJSON;
 }
 
-export function toJSON(this: DQNAgent): DQNJSON{
+export function toJSON(this: DQNAgent): DQNJSON {
     return {
         nh: this.nh,
         ns: this.ns,
@@ -17,7 +17,7 @@ export function toJSON(this: DQNAgent): DQNJSON{
     };
 }
 
-export function fromJSON(this: DQNAgent, j: DQNJSON){
+export function fromJSON(this: DQNAgent, j: DQNJSON) {
     this.nh = j.nh;
     this.ns = j.ns;
     this.na = j.na;

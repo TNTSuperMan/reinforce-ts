@@ -1,7 +1,7 @@
 import type { DQNAgent, DQNEnv, DQNOptions } from ".";
 import { getopt } from "../utils/getopt";
 
-export function initDQN(this: DQNAgent, env: DQNEnv, opt?: DQNOptions){
+export function initDQN(this: DQNAgent, env: DQNEnv, opt?: DQNOptions) {
     this.gamma = getopt(opt, "gamma", 0.75);
     this.epsilon = getopt(opt, "epsilon", 0.1);
     this.alpha = getopt(opt, "alpha", 0.01);

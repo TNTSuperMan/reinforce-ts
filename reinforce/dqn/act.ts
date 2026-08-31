@@ -1,7 +1,7 @@
 import type { DQNAgent } from ".";
 import { Mat, maxi, randi } from "../../recurrent";
 
-export function act(this: DQNAgent, slist: Float64Array){
+export function act(this: DQNAgent, slist: Float64Array) {
     const s = new Mat(this.ns, 1);
     s.setFrom(slist);
 

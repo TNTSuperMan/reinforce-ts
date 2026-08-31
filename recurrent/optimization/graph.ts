@@ -2,21 +2,22 @@ import { loop } from "../optimize";
 import { assert } from "../utils/assert";
 import { Mat } from "../class/mat";
 
-const sig = (x: number | undefined) => 1 / (1 + Math.exp(x === undefined ? 0 : -x));
+const sig = (x?: number | undefined) => 1 / (1 + Math.exp(x === undefined ? 0 : -x));
 
-export class Graph{
+export class Graph {
     needs_backprop: boolean;
     backprop: Function[];
-    constructor(needs_backprop?: boolean){
-        if(typeof needs_backprop === "undefined")
+    constructor(needs_backprop?: boolean) {
+        if (typeof needs_backprop === "undefined") {
             needs_backprop = true;
+        }
         this.needs_backprop = needs_backprop;
         this.backprop = [];
     }
-    backward(){
+    backward() {
         this.backprop.findLast(e=>(e(), false));
     }
-    rowPluck(m: Mat, ix: number){
+    rowPluck(m: Mat, ix: number): Mat {
         assert(ix >= 0 && ix < m.n);
         const { d } = m;
         const out = new Mat(d, 1);
@@ -28,7 +29,7 @@ export class Graph{
             ));
         return out;
     }
-    tanh(m: Mat){
+    tanh(m: Mat): Mat {
         const out = new Mat(m.n, m.d);
         const len = m.w.length;
         loop(len, i => out.w[i] = Math.tanh(m.w[i]));
@@ -38,7 +39,7 @@ export class Graph{
             ))
         return out;
     }
-    sigmoid(m: Mat){
+    sigmoid(m: Mat): Mat {
         const out = new Mat(m.n, m.d);
         const len = m.w.length;
         loop(len, i => out.w[i] = sig(m.w[i]));
@@ -49,7 +50,7 @@ export class Graph{
             }))
         return out;
     }
-    relu(m: Mat){
+    relu(m: Mat): Mat {
         const out = new Mat(m.n, m.d);
         const len = m.w.length;
         loop(len, i => out.w[i] = Math.max(0, m.w[i]));
@@ -59,14 +60,14 @@ export class Graph{
             ));
         return out;
     }
-    mul(m1: Mat, m2: Mat){
+    mul(m1: Mat, m2: Mat): Mat {
         assert(m1.d === m2.n, "matmul dimensions misaligned");
         const { n } = m1;
         const { d } = m2;
         const out = new Mat(n, d);
         loop(n, i => loop(d, j => {
             let dot = 0;
-            loop(m1.d, k => 
+            loop(m1.d, k =>
                 dot += m1.w[m1.d*i+k] * m2.w[d*k+j]);
             out.w[d*i+j] = dot;
         }));
@@ -80,7 +81,7 @@ export class Graph{
             )
         return out;
     }
-    add(m1: Mat, m2: Mat){
+    add(m1: Mat, m2: Mat): Mat {
         assert(m1.w.length === m2.w.length);
         const out = new Mat(m1.n, m1.d);
         loop(m1.w.length, i => out.w[i] = m1.w[i] + m2.w[i]);
@@ -91,7 +92,7 @@ export class Graph{
             }))
         return out;
     }
-    dot(m1: Mat, m2: Mat){
+    dot(m1: Mat, m2: Mat): Mat{
         assert(m1.w.length === m2.w.length);
         const out = new Mat(1, 1);
         let dot = 0;
@@ -104,15 +105,16 @@ export class Graph{
             }));
         return out;
     }
-    eltmul(m1: Mat, m2: Mat){
+    eltmul(m1: Mat, m2: Mat): Mat {
         assert(m1.w.length === m2.w.length);
         const out = new Mat(m1.n, m1.d);
         loop(m1.w.length, i => out.w[i] = m1.w[i] * m2.w[i]);
-        if(this.needs_backprop)
-            this.backprop.push(()=>loop(m1.w.length, i => {
+        if (this.needs_backprop) {
+            this.backprop.push(() => loop(m1.w.length, i => {
                 m1.dw[i] += m2.w[i] * out.dw[i];
                 m2.dw[i] += m1.w[i] * out.dw[i];
             }));
+        }
         return out;
     }
 }

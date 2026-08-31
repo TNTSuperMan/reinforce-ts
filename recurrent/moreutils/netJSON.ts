@@ -10,7 +10,7 @@ export const netToJSON = (net: Net): NetJSON =>
         Object.entries(net).map(e=>[e[0], e[1].toJSON()]));
 
 export const netFromJSON = (j: NetJSON): Net =>
-    Object.fromEntries(Object.entries(j).map(e=>{
+    Object.fromEntries(Object.entries(j).map(e => {
         const mat = new Mat(1, 1);
         mat.fromJSON(e[1]);
         return [e[0], mat];

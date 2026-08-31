@@ -1,7 +1,7 @@
 import type { DQNAgent } from ".";
 import { Mat, RandMat } from "../../recurrent";
 
-export function resetDQN(this: DQNAgent){
+export function resetDQN(this: DQNAgent) {
     this.nh = this.num_hidden_units;
     this.ns = this.env.getNumStates();
     this.na = this.env.getMaxNumActions();

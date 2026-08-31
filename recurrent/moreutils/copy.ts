@@ -10,4 +10,6 @@ export const copyMat = (b: Mat): Mat => {
 export const copyNet = (net: Net): Net =>
     Object.fromEntries(
         Object.entries(net).map(e=>
-            [e[0], copyMat(e[1])]));
+            [e[0], copyMat(e[1])]
+        )
+    );
