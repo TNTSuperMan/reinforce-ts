@@ -12,7 +12,7 @@ export class Mat{
     d: number;
     w: Float64Array;
     dw: Float64Array;
-    constructor(n: number, d: number){
+    constructor(n: number, d: number) {
         this.n = n;
         this.d = d;
         this.w = zeros(n * d);
@@ -28,20 +28,24 @@ export class Mat{
         assert(ix >= 0 && ix < this.w.length);
         this.w[ix] = v;
     }
-    setFrom(arr: Float64Array){
-        arr.forEach((e, i) => this.w[i] = e);
+    setFrom(arr: Float64Array) {
+        for (const [i, e] of arr.entries()) {
+            this.w[i] = e;
+        }
     }
-    setColumn(m: Mat, i: number){
-        m.w.forEach((e, q) => this.w[(this.d * q) + i] = e);
+    setColumn(m: Mat, i: number) {
+        for (const [q, e] of m.w.entries()) {
+            this.w[(this.d * q) + i] = e;
+        }
     }
-    toJSON(): MatJSON{
+    toJSON(): MatJSON {
         return {
             n: this.n,
             d: this.d,
             w: this.w
         };
     }
-    fromJSON(json: MatJSON){
+    fromJSON(json: MatJSON) {
         this.n = json.n;
         this.d = json.d;
         this.w = new Float64Array(json.w);
