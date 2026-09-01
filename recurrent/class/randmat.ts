@@ -7,7 +7,7 @@ function fillRandn(m: Mat, mu: number, std: number) {
     }
 }
 
-export function RandMat(n: number, d: number, mu: number, std: number){
+export function RandMat(n: number, d: number, mu: number, std: number)　{
     const m = new Mat(n, d);
     fillRandn(m, mu, std);
     return m;

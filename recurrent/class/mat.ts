@@ -1,13 +1,13 @@
 import { assert } from "../utils/assert";
 import { zeros } from "../utils/zeros";
 
-export interface MatJSON{
+export interface MatJSON　{
     n: number;
     d: number;
     w: Float64Array;
 }
 
-export class Mat{
+export class Mat　{
     n: number;
     d: number;
     w: Float64Array;
@@ -18,12 +18,12 @@ export class Mat{
         this.w = zeros(n * d);
         this.dw = zeros(n * d)
     }
-    get(row: number, col: number){
+    get(row: number, col: number)　{
         const ix = (this.d * row) + col;
         assert(ix >= 0 && ix < this.w.length);
         return this.w[ix];
     }
-    set(row: number, col: number, v: number){
+    set(row: number, col: number, v: number)　{
         const ix = (this.d * row) + col;
         assert(ix >= 0 && ix < this.w.length);
         this.w[ix] = v;

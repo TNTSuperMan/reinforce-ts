@@ -2,13 +2,13 @@ import type { Net } from "../moreutils/update";
 import type { Graph } from "../optimization/graph";
 import { Mat } from "./mat";
 
-interface Prev{
+interface Prev　{
     h: Mat[];
     c: Mat[];
     o: Mat;
 }
 
-export function forwardLSTM (G: Graph, model: Net, hidden_sizes: number[], x: number, prev: Prev): Prev {
+export function forwardLSTM(G: Graph, model: Net, hidden_sizes: number[], x: number, prev: Prev): Prev {
     if (prev == null || typeof prev.h === 'undefined') {
         var hidden_prevs = [] as Mat[];
         var cell_prevs = [] as Mat[];
