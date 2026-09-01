@@ -10,33 +10,33 @@ test("new initialized equality", ()=>{
     expect(mMat).toEqual(oMat);
 });
 
-describe("RandMat etc", ()=>{
+describe("RandMat etc", () => {
     const oMat = o_R.RandMat(10, 10, 0, 10);
     const mMat = m_R.copyMat(oMat);
-    test("initialized", ()=>{
+    test("initialized", () => {
         expect(mMat).toEqual(oMat);
     });
-    test("get", ()=>{
-        nums(100).forEach(i=>
-            expect(mMat.get(Math.floor(i/10), i%10))
-          .toEqual(oMat.get(Math.floor(i/10), i%10))
-        )
+    test("get", () => {
+        nums(10).forEach(r => nums(10).forEach(c =>
+            expect(mMat.get(r, c))
+                .toEqual(oMat.get(r, c))
+        ));
     });
-    test("set", ()=>{
-        nums(100).forEach(i=>{        
-            const value = Math.random() * 10;    
-            mMat.set(Math.floor(i/10), i%10, value)
-            oMat.set(Math.floor(i/10), i%10, value)
+    test("set", () => {
+        nums(10).forEach(r => nums(10).forEach(c => {
+            const value = Math.random() * 10;
+            mMat.set(r, c, value)
+            oMat.set(r, c, value)
             expect(mMat).toEqual(oMat);
-        })
-    })
-    test("setFrom", ()=>{
-        const data = new Float64Array(nums(100).toSorted(()=>Math.random()*2-1));
+        }));
+    });
+    test("setFrom", () => {
+        const data = new Float64Array(nums(100).map(() => Math.random()));
         mMat.setFrom(data);
         oMat.setFrom(data);
         expect(mMat).toEqual(oMat);
-    })
-    test("json", ()=>{
+    });
+    test("json", () => {
         expect(mMat.toJSON()).toEqual(oMat.toJSON());
-    })
-})
+    });
+});
